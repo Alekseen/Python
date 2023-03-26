@@ -1,0 +1,28 @@
+from tkinter import* 
+from random import* 
+
+def drawov(): 
+    canvas.create_oval(randint(0, 1200), randint(0, 500),randint(0, 1200), randint(0, 500)) 
+def drawpr(): 
+    canvas.create_rectangle(randint(0, 1200), randint(0, 500),randint(0, 1200), randint(0, 500)) 
+def drawtr(): 
+    point = ((randint(0, 1200), randint(0, 500)),(randint(0, 1200), randint(0, 500)),(randint(0, 1200), randint(0, 500))) 
+    canvas.create_polygon(point) 
+otv = False 
+def draw(): 
+    global otv 
+    func = [drawov, drawtr, drawpr] 
+    choice(func)() 
+    if otv: 
+        canvas.delete("all") 
+        otv = False 
+    else: 
+        otv = True 
+root = Tk() 
+root.geometry("1200x500") 
+root.resizable(False, False) 
+canvas = Canvas(bg="white", width=1200, height=500) 
+canvas.pack(anchor=CENTER, expand=1) 
+btn = Button(root, text="click", padx="6", pady="4", command=draw) 
+btn.place(x=450, y=350) 
+root.mainloop()
